@@ -40,6 +40,21 @@ The expected product shape is:
 - [Roadmap](./ROADMAP.md)
 - [Architecture](./docs/architecture.md)
 
+## Local development
+
+Requires Node.js 24.x LTS. This package depends on a local `../kernel` checkout via `file:` during scaffolding.
+
+```bash
+# from sibling kernel repo first:
+#   cd ../kernel && npm install && npm run build
+npm install
+npm run build
+node ./bin/observability.js --help
+node ./bin/observability.js init
+```
+
+CLI surface (v1): `init`, `validate`, `generate`, `doctor`. Default preset: `react-vite`.
+
 ## Working Principles
 
 - declarative configuration first
