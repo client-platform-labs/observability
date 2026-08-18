@@ -11,7 +11,10 @@
 - Config: human-authored JSONC, validated with JSON Schema 2020-12 via Ajv.
 - Documents carry `schemaVersion` and migrate before validation.
 
-Exact family config filenames are not locked yet. Do not copy the research placeholder names `wayfinder.config.jsonc` / `wayfinder.manifest.jsonc`.
+Family files:
+
+- Workspace config: `client-platform.config.jsonc`
+- Project manifest: `client-platform.manifest.jsonc`
 
 ## Product shape
 
@@ -51,11 +54,13 @@ npm scope and shared-kernel packages are family decisions, not this repo's to in
 - Sampling, redaction, and transport semantics.
 - Observability-specific presets and examples.
 
-## What should probably live in a family kernel
+## What lives in the family kernel
+
+Kernel is a separate repository, `client-platform-labs/kernel`. This product depends on it; it does not reimplement it.
+
+Kernel owns:
 
 - CLI bootstrap, logging, and error formatting.
-- JSONC load / migrate / validate.
+- JSONC load / migrate / validate for family config and manifests.
 - Plugin discovery and lazy loading.
 - Project discovery and shared doctor plumbing.
-
-That split is pending `shared kernel boundaries`.
