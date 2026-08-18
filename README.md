@@ -18,29 +18,20 @@ This repository is intended to cover:
 
 This repository should not become a product-specific analytics implementation.
 
-## Planned Shape
+## CLI (v1)
 
-The expected product shape is:
+Commands: `init`, `validate`, `generate`, `doctor`. Default preset: `react-vite`.
 
-- a CLI for initialization, validation, and code generation
-- reusable runtime packages for instrumentation and transport
-- shared schemas for logs, events, and performance signals
-- presets and plugins for common frontend stacks
-- examples and demo apps
+| Command | What it does |
+| --- | --- |
+| `init` | Creates `observability/schemas/` sample Event/Log schemas and `client-platform.config.jsonc` → `products.observability` |
+| `validate` | Scans schemas, checks Event/Log shape (Ajv + JSON Schema 2020-12), exits non-zero on failure |
+| `generate` | Emits TypeScript types, name/level constants, and typed `track()` / `log()` helpers under `observability/generated/` |
+| `doctor` | Light diagnostics (config + schemas presence) |
 
-## Initial Milestones
+Schemas live at `observability/schemas/<kind>.<name>.json`.
 
-1. Define the event/log domain model and governance boundaries.
-2. Design config and manifest conventions for instrumentation.
-3. Decide the package split between CLI, runtime, schema, and adapters.
-4. Create a minimal demo that validates event contracts locally.
-
-## Documents
-
-- [Roadmap](./ROADMAP.md)
-- [Architecture](./docs/architecture.md)
-
-## Local development
+## Quick start
 
 Requires Node.js 24.x LTS. This package depends on a local `../kernel` checkout via `file:` during scaffolding.
 
@@ -49,11 +40,26 @@ Requires Node.js 24.x LTS. This package depends on a local `../kernel` checkout 
 #   cd ../kernel && npm install && npm run build
 npm install
 npm run build
-node ./bin/observability.js --help
-node ./bin/observability.js init
+
+# in an app (or a scratch directory):
+node /path/to/observability/bin/observability.js init
+node /path/to/observability/bin/observability.js validate
+node /path/to/observability/bin/observability.js generate
 ```
 
-CLI surface (v1): `init`, `validate`, `generate`, `doctor`. Default preset: `react-vite`.
+After `generate`, import helpers from `observability/generated`:
+
+```ts
+import { track, log } from "./observability/generated/index.js";
+
+track("button_click", { buttonId: "cta", label: "Save" });
+log("app_lifecycle", "info", { phase: "boot" });
+```
+
+## Documents
+
+- [Roadmap](./ROADMAP.md)
+- [Architecture](./docs/architecture.md)
 
 ## Working Principles
 

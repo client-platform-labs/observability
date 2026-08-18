@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0",
+  "products": {
+    "observability": {
+      "preset": "react-vite",
+      "sampling": {
+        "defaultRate": 1
+      },
+      "redaction": {
+        "enabled": true,
+        "keys": [
+          "password",
+          "token",
+          "authorization"
+        ]
+      }
+    }
+  }
+}

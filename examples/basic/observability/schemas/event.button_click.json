@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1",
+  "kind": "event",
+  "name": "button_click",
+  "properties": {
+    "buttonId": {
+      "type": "string",
+      "description": "Stable button identifier"
+    },
+    "label": {
+      "type": "string",
+      "description": "Visible button label"
+    }
+  }
+}

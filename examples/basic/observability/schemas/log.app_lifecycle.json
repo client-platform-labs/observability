@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1",
+  "kind": "log",
+  "name": "app_lifecycle",
+  "levels": [
+    "debug",
+    "info",
+    "warn",
+    "error"
+  ],
+  "fields": {
+    "phase": {
+      "type": "string",
+      "description": "Lifecycle phase name"
+    },
+    "detail": {
+      "type": "string",
+      "description": "Optional human-readable detail"
+    }
+  }
+}
