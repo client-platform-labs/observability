@@ -16,6 +16,19 @@ Family files:
 
 - Workspace config: `client-platform.config.jsonc`
 - Project manifest: `client-platform.manifest.jsonc`
+- Observability settings: `products.observability` inside Workspace Config (sampling, redaction)
+- Schemas: `observability/schemas/<kind>.<name>.json`
+
+## Domain model (v1)
+
+| Kind | Role |
+| --- | --- |
+| Event | named interaction/product signal with `properties` |
+| Log | diagnostic signal with levels `debug\|info\|warn\|error` and optional `fields` |
+| Metric | deferred |
+
+Event file minimum: `schemaVersion`, `kind: "event"`, `name`, `properties`.  
+Log file minimum: `schemaVersion`, `kind: "log"`, `name`, levels fixed, optional `fields`.
 
 ## Product shape
 
@@ -23,11 +36,11 @@ Family files:
 CLI  ->  config/manifest  ->  schema + codegen  ->  runtime SDK  ->  transport adapters
 ```
 
-- **CLI**: project bootstrap, schema validation, codegen, doctor.
-- **Runtime SDK**: instrumentation APIs used by applications.
-- **Schema packages**: versioned event/log/metric contracts.
-- **Adapters**: framework and transport specifics (browser, WebView, mini program, vendor sinks).
-- **Presets**: opinionated defaults for common stacks.
+- **CLI**: `init`, `validate`, `generate`, `doctor`.
+- **Runtime SDK**: instrumentation APIs used by applications (package dependency, not regenerated wholesale).
+- **Schema packages / project schemas**: versioned Event/Log contracts.
+- **Adapters**: framework and transport specifics.
+- **Presets**: default `react-vite`.
 
 ## Proposed package split
 
@@ -43,14 +56,14 @@ This Product is also loadable by the Umbrella CLI `client-platform` through `pac
 
 | Flow | Input | Output |
 | --- | --- | --- |
-| `init` | empty or existing app | config, schema stubs, example instrumentation |
+| `init` | empty or existing app | config segment, schema stubs, sample Event/Log |
 | `validate` | schemas + config | pass/fail report with JSON pointers |
-| `generate` | schemas | typed helpers / constants |
-| runtime | app events | sanitized, sampled payloads on a transport |
+| `generate` | schemas | TS types, constants, typed `track()` / `log()` helpers |
+| runtime | app events/logs | sanitized, sampled payloads on a transport |
 
 ## What this repo should own
 
-- Event/log/metric domain model.
+- Event/Log domain model.
 - Runtime SDK behavior.
 - Sampling, redaction, and transport semantics.
 - Observability-specific presets and examples.
