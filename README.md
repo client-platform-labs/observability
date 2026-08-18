@@ -35,6 +35,11 @@ The expected product shape is:
 3. Decide the package split between CLI, runtime, schema, and adapters.
 4. Create a minimal demo that validates event contracts locally.
 
+## Documents
+
+- [Roadmap](./ROADMAP.md)
+- [Architecture](./docs/architecture.md)
+
 ## Working Principles
 
 - declarative configuration first
