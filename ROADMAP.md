@@ -1,28 +1,28 @@
 # Roadmap
 
-This is the first delivery map for `observability`. It is a product plan, not an implementation contract. Shared-kernel ownership is still an open family decision.
+Deep MVP track for Client Platform Labs v1.
 
 ## Now
 
-- Keep the repository charter current.
-- Lock the domain language: event, log, metric, transport, sampler, redaction.
+- Lock domain language: event, log, metric, transport, sampler, redaction.
 - Draft the event/log schema dialect and versioning rules.
-- Define the first CLI surface: `init`, `validate`, `generate`, `doctor`.
+- CLI surface (locked): `init`, `validate`, `generate`, `doctor`.
+- Default preset (locked): `react-vite`.
 
 ## Next
 
-- Ship a local-only MVP: initialize a project, validate schemas, generate typed event helpers, and emit events to a file or stdout transport.
-- Add sampling, redaction, and environment overlays as explicit config, not hidden runtime magic.
-- Publish the first example app that can be cloned and run without a vendor backend.
+- Local MVP: init with `react-vite`, validate schemas, generate typed helpers.
+- Example app that runs without a vendor backend (file/stdout transport in app code, not a CLI `emit` command).
+- Sampling and redaction as explicit config.
 
 ## Later
 
-- Add production transports and adapter presets for common frontend stacks.
-- Add privacy reviews, schema compatibility checks, and release-time governance commands.
-- Align package layout with the family shared kernel once that boundary is decided.
+- Production transports and more presets.
+- Privacy reviews and release-time governance commands.
 
 ## Non-goals for v1
 
-- Building a hosted observability backend.
-- Encoding business KPI semantics into the toolkit.
-- Requiring a specific vendor (Sentry, Prometheus, etc.) to get started.
+- Hosted observability backend.
+- Business KPI semantics.
+- Vendor-required getting started (Sentry, etc.).
+- CLI `emit` command.
