@@ -6,7 +6,8 @@
 
 - Runtime: Node.js 24.x LTS + TypeScript.
 - CLI framework: `commander`.
-- Packaging: ESM-first npm packages with a `bin` entry.
+- Packaging: ESM-first npm packages under `@client-platform/*`, with Product `bin` entries plus family command `client-platform`.
+- Plugin metadata: `package.json#clientPlatform`.
 - Command loading: static core commands; heavy/optional paths via `import()`.
 - Config: human-authored JSONC, validated with JSON Schema 2020-12 via Ajv.
 - Documents carry `schemaVersion` and migrate before validation.
@@ -30,13 +31,13 @@ CLI  ->  config/manifest  ->  schema + codegen  ->  runtime SDK  ->  transport a
 
 ## Proposed package split
 
-- `observability` CLI package
-- `@.../observability-runtime`
-- `@.../observability-schema`
-- `@.../observability-adapter-*`
+- `@client-platform/observability` CLI package, bin `observability`
+- `@client-platform/observability-runtime`
+- `@client-platform/observability-schema`
+- `@client-platform/observability-adapter-*`
 - `examples/*`
 
-npm scope and shared-kernel packages are family decisions, not this repo's to invent in isolation.
+This Product is also loadable by the Umbrella CLI `client-platform` through `package.json#clientPlatform`.
 
 ## Inputs and outputs
 
